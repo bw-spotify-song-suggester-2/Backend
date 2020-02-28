@@ -32,23 +32,23 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get("/:id/recs", (req, res) => {
-  const { id } = req.params;
+// router.get("/:id/recs", (req, res) => {
+//   const { id } = req.params;
 
-  Recs.findRecs(id)
-    .then(recs => {
-      if (recs.length) {
-        res.json(recs);
-      } else {
-        res
-          .status(404)
-          .json({ message: "Could not find recs for given user" });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to get recs" });
-    });
-});
+//   Recs.findRecs(id)
+//     .then(recs => {
+//       if (recs.length) {
+//         res.json(recs);
+//       } else {
+//         res
+//           .status(404)
+//           .json({ message: "Could not find recs for given user" });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to get recs" });
+//     });
+// });
 
 router.post("/", (req, res) => {
   const recData = req.body;
@@ -62,26 +62,26 @@ router.post("/", (req, res) => {
     });
 });
 
-router.post("/:id/steps", (req, res) => {
-  const stepData = req.body;
-  const { id } = req.params;
+// router.post("/:id/steps", (req, res) => {
+//   const stepData = req.body;
+//   const { id } = req.params;
 
-  Recs.findById(id)
-    .then(scheme => {
-      if (scheme) {
-        Recs.addStep(stepData, id).then(step => {
-          res.status(201).json(step);
-        });
-      } else {
-        res
-          .status(404)
-          .json({ message: "Could not find scheme with given id." });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to create new step" });
-    });
-});
+//   Recs.findById(id)
+//     .then(scheme => {
+//       if (scheme) {
+//         Recs.addStep(stepData, id).then(step => {
+//           res.status(201).json(step);
+//         });
+//       } else {
+//         res
+//           .status(404)
+//           .json({ message: "Could not find scheme with given id." });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to create new step" });
+//     });
+// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
@@ -114,11 +114,11 @@ router.delete("/:id", (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "Could not find scheme with given id" });
+          .json({ message: "Could not find rec with given id" });
       }
     })
     .catch(err => {
-      res.status(500).json({ message: "Failed to delete scheme" });
+      res.status(500).json({ message: "Failed to delete rec" });
     });
 });
 
