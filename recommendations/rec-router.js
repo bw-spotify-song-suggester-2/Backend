@@ -32,56 +32,41 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// router.get("/:id/recs", (req, res) => {
-//   const { id } = req.params;
-
-//   Recs.findRecs(id)
-//     .then(recs => {
-//       if (recs.length) {
-//         res.json(recs);
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "Could not find recs for given user" });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to get recs" });
-//     });
-// });
+router.get("/:id/recs", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  Recs.findRecs(id)
+    .then(recommendation => {
+      console.log(recommendation);
+      if (recommendation.length) {
+        res.json(recommendation);
+      } else {
+        res.status(404).json({ message: "Could not find recs for given user" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get recs" });
+    });
+});
 
 router.post("/", (req, res) => {
   const recData = req.body;
-
+  
+  console.log(recData);
   Recs.add(recData)
-    .then(rec => {
-      res.status(201).json(rec);
+    .then(recs => {
+      if (recs.length) {
+        res.status(201).json(recs);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not post data for user" });
+      }
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to create new recommendation" });
     });
 });
-
-// router.post("/:id/steps", (req, res) => {
-//   const stepData = req.body;
-//   const { id } = req.params;
-
-//   Recs.findById(id)
-//     .then(scheme => {
-//       if (scheme) {
-//         Recs.addStep(stepData, id).then(step => {
-//           res.status(201).json(step);
-//         });
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "Could not find scheme with given id." });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to create new step" });
-//     });
-// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
