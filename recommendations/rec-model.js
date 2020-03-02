@@ -3,7 +3,7 @@ const db = require("../data/dbConfig.js");
 module.exports = {
   find,
   findById,
-  findSteps,
+  findRecs,
   add,
   update,
   remove
@@ -19,21 +19,19 @@ function findById(id) {
     .first();
 }
 
-function findSteps(id) {
+function findRecs(userId) {
   return db("recommendations")
-    .select("users.id", "artist", "album", "song")
+    .select("user_id", "artist", "album", "song")
     .from("recommendations")
-    .join("users", { "users.id": "recommendations.user_id" })
-    .where({ user_id: id })
-    .orderBy("recommendations", "asc");
+    .where("user_id", userId);
 }
 
 function add(rec) {
-  db("recommendations")
+  return db("recommendations")
     .insert(rec)
-    .then(ids => {
-      return findById(ids[0]);
-    });
+    // .then(id => {
+    //   return findRecs(id);
+    // });
 }
 
 function update(changes, id) {
