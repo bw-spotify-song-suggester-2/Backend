@@ -8,6 +8,13 @@ exports.seed = function(knex) {
       username: "first",
       email: "first.last@gmail.com",
       password: bcrypt.hashSync("first", 10)
+    },
+    {
+      firstName: "Second",
+      lastName: "Last",
+      username: "second",
+      email: "second.last@gmail.com",
+      password: bcrypt.hashSync("second", 10)
     }
   ]);
 };
