@@ -21,6 +21,14 @@ Expects something like this:
   }
 ```
 
+This is what the response will look like:
+```
+{
+    "created_user": "wddsddfdfdf",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODMyMTk3NTEsImV4cCI6MTU4MzIyMzM1MX0.mi3Jb7zVwRYJIoI1_SmohlHzi5ov856M4I4-s7JlSNw"
+}
+```
+
 ### Login
 
 https://spotify-song-suggester-neo.herokuapp.com/api/auth/login
@@ -31,6 +39,15 @@ Expects this:
     "username": "user",
     "password": "pass"
   }
+```
+
+This is what the response will look like:
+
+```
+{
+    "username": "first",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoiZmlyc3QiLCJpYXQiOjE1ODMyMTQ1OTEsImV4cCI6MTU4MzIxODE5MX0.5L-yrZbnc8HgLRGYS1vQnipTf7LCvNIrOYIal1i3BJA"
+}
 ```
 
 ### Get Recommendations
