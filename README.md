@@ -73,3 +73,37 @@ The response will look like this:
     }
 ]
 ```
+
+### Post Spotify Playlist and Get Recommendations
+
+https://spotify-song-suggester-neo.herokuapp.com/api/playlists/:id
+
+You can post the following:
+```
+{
+	"spotify_playlist": "5vBQ35wpIzaCTKFMCYrJqQ"
+}
+```
+
+And get back this:
+
+```
+[
+    {
+        "track_id": 144,
+        "artist": "Real Estate",
+        "album": "In Mind",
+        "song": "Stained Glass",
+        "user_id": 4,
+        "playlist_id": 77
+    },
+    {
+        "track_id": 145,
+        "artist": "will.i.am",
+        "album": "#willpower",
+        "song": "Scream & Shout",
+        "user_id": 4,
+        "playlist_id": 77
+    }
+]
+```
