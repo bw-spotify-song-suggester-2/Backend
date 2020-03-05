@@ -19,19 +19,18 @@ function findById(id) {
     .first();
 }
 
-function findRecs(userId) {
+function findRecs(id) {
   return db("recommendations")
-    .select("user_id", "artist", "album", "song")
-    .from("recommendations")
-    .where("user_id", userId);
+    // .select("user_id", "user_id", "artist", "album", "song")
+    .where("user_id", id);
 }
 
 function add(rec) {
   return db("recommendations")
     .insert(rec)
-    // .then(id => {
-    //   return findRecs(id);
-    // });
+    .then(([id]) => {
+      return findById(id);
+    });
 }
 
 function update(changes, id) {

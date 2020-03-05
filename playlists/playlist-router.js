@@ -1,7 +1,8 @@
 const express = require("express");
 
 const playlists = require("./playlist-model.js");
-
+const recs = require("../recommendations/rec-model.js");
+const axios = require('axios');
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -26,20 +27,41 @@ router.get("/:id", (req, res) => {
         });
 });
 
-router.post("/:id", (req, res) => {
+router.post("/:id", async (req, res) => {
   const playListData = req.body;
-  console.log(playListData);
+  const playlistId = req.body.spotify_playlist;
   const { id } = req.params;
   const playlistFull = { ...playListData, user_id: id };
 
-  playlists
-    .add(playlistFull, id)
-    .then(playlist => {
-      res.status(201).json(playlist);
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to create new playlist" });
+  try {
+    const playlistAdd = await playlists.add(playlistFull, id);
+    const dsResponse = await axios.get(`https://spotify-song-suggester-2.herokuapp.com/request/?search=${playlistId}`, playlistAdd);
+    // console.log(dsResponse.data.data);
+    // const stringDsResponse = JSON.stringify(dsResponse.data.data);
+    // console.log(stringDsResponse);
+    const mappedDsResponse = dsResponse.data.data.map(async item => {
+      const newObj = {
+        artist: item.artist,
+        album: item.album,
+        song: item.track,
+        user_id: id,
+        playlist_id: playlistAdd[0]
+      };
+      // console.log(newObj);
+      const insertRecs = await recs.add(newObj);
+      return insertRecs;
     });
+    Promise.all(mappedDsResponse)
+    .then(cb => {
+      console.log(cb);
+      const result = cb.map((item) => {
+        return item;
+      });
+      res.status(201).json(result);
+    })    
+  } catch (err) {
+    res.status(500).json({ message: "Failed to create new playlist" });
+  }
 });
 
 module.exports = router;
