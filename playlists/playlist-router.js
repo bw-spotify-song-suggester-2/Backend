@@ -35,17 +35,15 @@ router.post("/:id", async (req, res) => {
 
   try {
     const playlistAdd = await playlists.add(playlistFull, id);
+    console.log(playlistAdd);
     const dsResponse = await axios.get(`https://spotify-song-suggester-2.herokuapp.com/request/?search=${playlistId}`, playlistAdd);
-    // console.log(dsResponse.data.data);
-    // const stringDsResponse = JSON.stringify(dsResponse.data.data);
-    // console.log(stringDsResponse);
+
     const mappedDsResponse = dsResponse.data.data.map(async item => {
       const newObj = {
         artist: item.artist,
         album: item.album,
         song: item.track,
         user_id: id,
-        // track_id: item.id,
         playlist_id: playlistAdd[0]
       };
       console.log(newObj);
