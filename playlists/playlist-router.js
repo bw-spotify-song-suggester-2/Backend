@@ -45,9 +45,10 @@ router.post("/:id", async (req, res) => {
         album: item.album,
         song: item.track,
         user_id: id,
+        // track_id: item.id,
         playlist_id: playlistAdd[0]
       };
-      // console.log(newObj);
+      console.log(newObj);
       const insertRecs = await recs.add(newObj);
       return insertRecs;
     });
