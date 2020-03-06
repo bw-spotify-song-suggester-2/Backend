@@ -4,6 +4,7 @@ exports.seed = function(knex) {
       artist: "Hot Chip",
       album: "Why Make Sense?",
       song: "Huarache Lights",
+      track_id: "lkjasdfoji",
       user_id: "1",
       playlist_id: "1"
     },
@@ -11,6 +12,7 @@ exports.seed = function(knex) {
       artist: "Kavinsky",
       album: "Nightcall",
       song: "Nightcall",
+      track_id: "lkjasdfoji",
       user_id: "1",
       playlist_id: "1"
     },
@@ -18,6 +20,7 @@ exports.seed = function(knex) {
       artist: "Radiohead",
       album: "Kid A",
       song: "Everything in its right place",
+      track_id: "lkjasdfoji",
       user_id: "2",
       playlist_id: "2"
     },
@@ -25,6 +28,7 @@ exports.seed = function(knex) {
       artist: "TV on the Radio",
       album: "Seeds",
       song: "Quartz",
+      track_id: "lkjasdfoji",
       user_id: "2",
       playlist_id: "2"
     }
