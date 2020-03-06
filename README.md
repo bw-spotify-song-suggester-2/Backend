@@ -107,3 +107,9 @@ And get back this:
     }
 ]
 ```
+
+### Delete Spotify Playlist and Associated Recommendations
+
+https://spotify-song-suggester-neo.herokuapp.com/api/playlists/:id
+
+If you send a delete to this passing in the ID of the playlist, it will remove it. 
