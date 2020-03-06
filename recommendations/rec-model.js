@@ -28,6 +28,7 @@ function findRecs(id) {
 function add(rec) {
   return db("recommendations")
     .insert(rec)
+    .returning("id")
     .then(([id]) => {
       return findById(id);
     });
