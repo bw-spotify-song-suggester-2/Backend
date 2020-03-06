@@ -42,6 +42,7 @@ router.post("/:id", async (req, res) => {
         artist: item.artist,
         album: item.album,
         song: item.track,
+        track_id: item.track_id,
         user_id: id,
         playlist_id: playlistAdd[0]
       };

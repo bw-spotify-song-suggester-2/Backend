@@ -32,6 +32,7 @@ exports.up = function(knex) {
       recommendation.string("artist", 255).notNullable();
       recommendation.string("album", 255).notNullable();
       recommendation.string("song", 255).notNullable();
+      recommendation.string("track_id", 255).notNullable();
       recommendation
         .integer("user_id")
         .unsigned()
