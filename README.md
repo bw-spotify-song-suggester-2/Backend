@@ -54,7 +54,7 @@ This is what the response will look like:
 
 https://spotify-song-suggester-neo.herokuapp.com/api/recommendations/:id/recs
 
-This will bring back the recommendations for a given ID. However, this will ultimately change, and this should only be used to model how to parse the response. 
+This will bring back the recommendations for a given USER ID. However, this will ultimately change, and this should only be used to model how to parse the response. 
 
 The response will look like this:
 ```
@@ -107,3 +107,9 @@ And get back this:
     }
 ]
 ```
+
+### Delete Spotify Playlist and Associated Recommendations
+
+https://spotify-song-suggester-neo.herokuapp.com/api/playlists/:id
+
+If you send a delete to this passing in the ID of the playlist (in other areas it comes back as playlist_id, but from the playlists table it's just id), it will remove it. 
