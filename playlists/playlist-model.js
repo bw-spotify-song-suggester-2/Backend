@@ -25,7 +25,8 @@ function find(userId) {
 function add(playlist, userId) { 
   return db("playlists")
     .insert(playlist)
-    // .then(playlistId => {
-    //   return find(userId);
+    .returning("id");
+    // .then(([id]) => {
+    //   return id;
     // });
 }
