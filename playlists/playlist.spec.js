@@ -49,7 +49,7 @@ describe('Playlist Model', () => {
     it("Succeeds with token", async () => {
       await request(server)
         .get("/api/playlists")
-        .set("Authorization", `Bearer ${auth.token}`)
+        .set("Authorization", auth.token)
         .then(res => {
           expect(res.statusCode).toBe(200);
           expect(res.type).toBe("application/json");
