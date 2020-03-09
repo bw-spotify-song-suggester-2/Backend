@@ -3,8 +3,10 @@ const db = require("../data/dbConfig.js");
 module.exports = {
   find,
   findAll,
+  findById,
   add,
-  remove
+  remove,
+  update
 };
 
 function findAll() {
@@ -32,8 +34,22 @@ function add(playlist, userId) {
     // });
 }
 
+function findById(id) {
+  return db("playlists")
+    .where("id", id)
+    .returning("id");
+}
+
 function remove(id) {
   return db("playlists")
     .where("id", id)
     .del();
+}
+
+function update(changes, id) {
+  return db("playlists")
+    .where("id", id)
+    .update(changes)
+    .returning("id");
+    // .then(count => (count > 0 ? this.get(id) : null));
 }

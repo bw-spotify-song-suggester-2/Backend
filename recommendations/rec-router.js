@@ -73,10 +73,10 @@ router.put("/:id", (req, res) => {
   const changes = req.body;
 
   Recs.findById(id)
-    .then(scheme => {
-      if (scheme) {
-        Recs.update(changes, id).then(updatedScheme => {
-          res.json(updatedScheme);
+    .then(recommendation => {
+      if (recommendation) {
+        Recs.update(changes, id).then(updatedRecommendation => {
+          res.json(updatedRecommendation);
         });
       } else {
         res
