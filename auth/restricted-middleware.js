@@ -8,7 +8,8 @@ module.exports = (req, res, next) => {
   } else if (token) {
     jwt.verify(token, secrets.jwtSecret, (err, decodedJwt) => {
       if (err) {
-        res.status(401).json({ you: "No sir, no how" });
+        console.log(err);
+        res.status(401).json({ you: `${err}, No ADMITTANCE` });
       } else {
         req.decodedJwt = decodedJwt;
         next();

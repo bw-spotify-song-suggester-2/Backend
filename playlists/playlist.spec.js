@@ -37,6 +37,7 @@ function loginUser(auth) {
 }
 
 describe('Playlist Model', () => {
+    
     it("Fail to get playlists without login and token", async () => {
       await request(server)
         .get("/api/playlists")
@@ -45,13 +46,13 @@ describe('Playlist Model', () => {
         });
     });
 
-    it("Succeeds with login and token", async () => {
-        console.log(auth.token);
+    it("Succeeds with token", async () => {
       await request(server)
         .get("/api/playlists")
-        .set("Authorization", + auth.token)
+        .set("Authorization", `Bearer ${auth.token}`)
         .then(res => {
-          expect(res.body.you).toBe("Not allowed");
+          expect(res.statusCode).toBe(200);
+          expect(res.type).toBe("application/json");
         });
     });
 
