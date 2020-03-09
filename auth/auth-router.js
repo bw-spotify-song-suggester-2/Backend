@@ -7,17 +7,24 @@ const Users = require("../users/users-model.js");
 
 router.post("/register", (req, res) => {
   let user = req.body;
-  const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
-  user.password = hash;
+  
+  if (user.username && user.password && user.firstName && user.lastName && user.email) {
+    const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
+    user.password = hash;
+    Users.add(user)
+      .then(saved => {
+        const token = genToken(saved);
+        res
+          .status(201)
+          .json({ created_user: user.username, user_id: user.id, token: token });
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  } else {
+    res.status(400).json({ message: "Need first name, last name, username, email, and password" });
+  }
 
-  Users.add(user)
-    .then(saved => {
-      const token = genToken(saved);
-      res.status(201).json({ created_user: user.username, user_id: user.id, token: token });
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
 });
 
 router.post("/login", (req, res) => {

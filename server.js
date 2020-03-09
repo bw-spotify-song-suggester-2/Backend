@@ -16,7 +16,11 @@ server.use(express.json());
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
-server.use("/api/playlists", playlistRouter);
+server.use("/api/playlists", authenticate, playlistRouter);
 server.use("/api/recommendations", authenticate, recRouter);
+
+server.get("/", (req, res) => {
+  res.status(200).json({ api: "running" });
+});
 
 module.exports = server;
